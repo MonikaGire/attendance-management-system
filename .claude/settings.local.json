@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"d:\\\\Monika\\\\assignment\\\\attendance\\\\backend\\\\src\\\\main\\\\java\\\\com\\\\attendance\\\\config\")",
+      "Bash(mkdir -p \"d:\\\\Monika\\\\assignment\\\\attendance\\\\backend\\\\src\\\\main\\\\java\\\\com\\\\attendance\\\\entity\")",
+      "Bash(mkdir -p \"d:\\\\Monika\\\\assignment\\\\attendance\\\\backend\\\\src\\\\main\\\\java\\\\com\\\\attendance\\\\enums\")",
+      "Bash(mkdir -p \"d:\\\\Monika\\\\assignment\\\\attendance\\\\backend\\\\src\\\\main\\\\java\\\\com\\\\attendance\\\\repository\")",
+      "Bash(mkdir -p \"d:\\\\Monika\\\\assignment\\\\attendance\\\\backend\\\\src\\\\main\\\\java\\\\com\\\\attendance\\\\dto\\\\request\")",
+      "Bash(git add *)"
+    ]
+  }
+}

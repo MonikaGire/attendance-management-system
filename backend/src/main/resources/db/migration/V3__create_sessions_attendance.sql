@@ -1,0 +1,40 @@
+CREATE TABLE sessions (
+    id CHAR(36) NOT NULL,
+    class_id CHAR(36) NOT NULL,
+    session_date DATE NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    type VARCHAR(20) NOT NULL DEFAULT 'REGULAR',
+    grace_period_minutes INT DEFAULT 15,
+    status VARCHAR(20) DEFAULT 'SCHEDULED',
+    created_at DATETIME(3) DEFAULT CURRENT_TIMESTAMP(3),
+    updated_at DATETIME(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+    deleted_at DATETIME(3),
+    PRIMARY KEY (id),
+    KEY idx_sessions_class_date (class_id, session_date),
+    KEY idx_sessions_date (session_date),
+    CONSTRAINT fk_sessions_class FOREIGN KEY (class_id) REFERENCES school_classes(id) ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE attendance_records (
+    id CHAR(36) NOT NULL,
+    student_id CHAR(36) NOT NULL,
+    session_id CHAR(36) NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    check_in_time DATETIME(3),
+    source VARCHAR(20) NOT NULL DEFAULT 'BIOMETRIC',
+    device_id CHAR(36),
+    notes TEXT,
+    overridden_by CHAR(36),
+    created_at DATETIME(3) DEFAULT CURRENT_TIMESTAMP(3),
+    updated_at DATETIME(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+    deleted_at DATETIME(3),
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_student_session (student_id, session_id),
+    KEY idx_ar_student (student_id),
+    KEY idx_ar_session (session_id),
+    KEY idx_ar_status (status),
+    KEY idx_ar_check_in (check_in_time),
+    CONSTRAINT fk_ar_student FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_ar_session FOREIGN KEY (session_id) REFERENCES sessions(id) ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
